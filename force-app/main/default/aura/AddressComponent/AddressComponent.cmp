@@ -1,0 +1,51 @@
+<aura:component controller="AddressController" implements="lightning:actionOverride,force:lightningQuickActionWithoutHeader,force:hasRecordId,force:hasSObjectName" access="global">
+    
+ 	<aura:attribute name="postalCode" type="String" />
+ 	<aura:attribute name="address"    type="AddressResult" />
+    <aura:attribute name="RegForm" type="Account" default="{'sobjectType' : 'Account'}"/>
+
+	<header class="slds-modal__header" style="border-bottom: none;">
+		<h2 class="slds-text-heading_medium slds-hyphenate">Busca de CEP</h2>
+	</header>
+
+    <section class="slds-box cmp-background--white">
+
+        <div class="slds-grid slds-wrap" >
+            
+            <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                <lightning:input 
+                    type="text" label="CEP" onblur="{!c.fetchAddress}"
+                    value="{!v.postalCode}" />
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                <label class="slds-form-element__label slds-no-flex">Logradouro</label><br/>
+                <lightning:formattedText value="{!v.address.logradouro}"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                <label class="slds-form-element__label slds-no-flex">Cidade</label><br/>
+                <lightning:formattedText value="{!v.address.localidade}"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                <label class="slds-form-element__label slds-no-flex">Estado</label><br/>
+                <lightning:formattedText value="{!v.address.uf}"/>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                <lightning:input type="text" label="Número"/>
+            </div>
+        </div>
+
+        <footer class="slds-clearfix slds-m-top_medium">
+            <lightning:button 
+                variant="brand" label="Salvar" 
+                title="Salvar" onclick="{!c.save}" 
+                class="slds-float_right slds-m-right_x-small">
+            </lightning:button>
+        </footer>
+
+    </section>
+
+</aura:component>
